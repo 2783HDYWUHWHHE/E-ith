@@ -19,10 +19,10 @@ export default function Products() {
   const [products, setProducts] = useState([
     { id: 1, name: 'Pro Gaming Laptop', sku: 'LTP-1092', category: 'Electronics', price: 1299.99, stock: 45, maxStock: 100, image: 'https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&q=80&w=512' },
     { id: 2, name: 'Samsung Galaxy S24 Ultra', sku: 'SMG-2401', category: 'Electronics', price: 1199.99, stock: 12, maxStock: 80, image: '/phone.jpg' },
-    { id: 3, name: 'Minimalist Leather Jacket', sku: 'JKT-220', category: 'Apparel', price: 249.50, stock: 8, maxStock: 40, image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&q=80&w=512' },
+    { id: 3, name: 'Vivo X100 Pro', sku: 'VVO-1001', category: 'Electronics', price: 899.99, stock: 8, maxStock: 40, image: '/vivo.jpg' },
     { id: 4, name: 'Smart Fitness Band', sku: 'FIT-091', category: 'Electronics', price: 79.99, stock: 92, maxStock: 150, image: 'https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?auto=format&fit=crop&q=80&w=512' },
-    { id: 5, name: 'Titanium Mechanical Watch', sku: 'WTC-488', category: 'Accessories', price: 599.00, stock: 3, maxStock: 15, image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=512' },
-    { id: 6, name: 'Ergonomic Office Chair', sku: 'CHR-882', category: 'Home', price: 349.00, stock: 0, maxStock: 30, image: 'https://images.unsplash.com/photo-1505797149-43b0069ec26b?auto=format&fit=crop&q=80&w=512' }
+    { id: 5, name: 'Oppo Find X9 Ultra', sku: 'OPP-9901', category: 'Electronics', price: 999.99, stock: 3, maxStock: 15, image: '/oppo.png' },
+    { id: 6, name: 'OnePlus 12', sku: 'ONP-1201', category: 'Electronics', price: 799.99, stock: 0, maxStock: 30, image: '/oneplus12.jpg' }
   ]);
 
   const [search, setSearch] = useState('');

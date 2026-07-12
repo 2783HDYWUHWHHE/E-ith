@@ -13,32 +13,32 @@ export default function Orders() {
       status: 'Pending',
       address: 'No 15, St 271, Phnom Penh, Cambodia',
       items: [
-        { name: 'Pro Gaming Laptop', qty: 1, price: 1299.99 },
-        { name: 'Samsung Galaxy S24 Ultra', qty: 1, price: 1199.99 }
+        { name: 'Pro Gaming Laptop', qty: 1, price: 1299.99, image: 'https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&q=80&w=256' },
+        { name: 'Samsung Galaxy S24 Ultra', qty: 1, price: 1199.99, image: '/phone.jpg' }
       ]
     },
     { 
       id: 'ORD-9820', 
       customer: 'Sophea Kim', 
       date: '2026-07-09', 
-      total: 249.50, 
+      total: 899.99, 
       payment: 'PayPal',
       status: 'Shipped',
       address: 'Vimean Phnom Penh, Sen Sok, Cambodia',
       items: [
-        { name: 'Minimalist Leather Jacket', qty: 1, price: 249.50 }
+        { name: 'Vivo X100 Pro', qty: 1, price: 899.99, image: '/vivo.jpg' }
       ]
     },
     { 
       id: 'ORD-9819', 
       customer: 'Rithy Sok', 
       date: '2026-07-08', 
-      total: 1198.00, 
+      total: 1999.98, 
       payment: 'Crypto',
       status: 'Completed',
       address: 'Street 51, BKK1, Phnom Penh, Cambodia',
       items: [
-        { name: 'Titanium Mechanical Watch', qty: 2, price: 599.00 }
+        { name: 'Oppo Find X9 Ultra', qty: 2, price: 999.99, image: '/oppo.png' }
       ]
     },
     { 
@@ -50,21 +50,21 @@ export default function Orders() {
       status: 'Cancelled',
       address: 'St 371, Steung Meanchey, Phnom Penh, Cambodia',
       items: [
-        { name: 'Smart Fitness Band', qty: 1, price: 79.99 }
+        { name: 'Smart Fitness Band', qty: 1, price: 79.99, image: 'https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?auto=format&fit=crop&q=80&w=256' }
       ]
     },
     { 
       id: 'ORD-9817', 
       customer: 'Dara Pich', 
       date: '2026-07-04', 
-      total: 1678.98, 
+      total: 2129.97, 
       payment: 'Credit Card',
       status: 'Completed',
       address: 'No 82, Toul Kork, Phnom Penh, Cambodia',
       items: [
-        { name: 'Samsung Galaxy S24 Ultra', qty: 1, price: 1199.99 },
-        { name: 'Ergonomic Office Chair', qty: 1, price: 349.00 },
-        { name: 'Smart Fitness Band', qty: 1, price: 129.99 }
+        { name: 'Samsung Galaxy S24 Ultra', qty: 1, price: 1199.99, image: '/phone.jpg' },
+        { name: 'OnePlus 12', qty: 1, price: 799.99, image: '/oneplus12.jpg' },
+        { name: 'Smart Fitness Band', qty: 1, price: 129.99, image: 'https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?auto=format&fit=crop&q=80&w=256' }
       ]
     }
   ]);
@@ -305,10 +305,19 @@ export default function Orders() {
                 <span className="text-white/40 text-[10px] font-bold tracking-widest uppercase block">Purchased Items</span>
                 <div className="divide-y divide-white/5 border-y border-white/5 py-1">
                   {selectedOrder.items.map((item, idx) => (
-                    <div key={idx} className="flex justify-between py-2.5 text-xs">
-                      <div>
-                        <div className="font-bold text-white">{item.name}</div>
-                        <div className="text-white/40 text-[10px] mt-0.5">Quantity: {item.qty}</div>
+                    <div key={idx} className="flex items-center justify-between py-2.5 text-xs">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-9 h-9 rounded-lg overflow-hidden border border-white/10 shrink-0 bg-[#141526]">
+                          <img 
+                            src={item.image || 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&q=80&w=256'} 
+                            alt={item.name} 
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <div>
+                          <div className="font-bold text-white">{item.name}</div>
+                          <div className="text-white/40 text-[10px] mt-0.5">Quantity: {item.qty}</div>
+                        </div>
                       </div>
                       <div className="font-semibold text-white/90">
                         ${(item.price * item.qty).toFixed(2)}
