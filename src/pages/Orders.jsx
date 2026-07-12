@@ -8,13 +8,13 @@ export default function Orders() {
       id: 'ORD-9821', 
       customer: 'Samath Long', 
       date: '2026-07-10', 
-      total: 1499.98, 
+      total: 2499.98, 
       payment: 'Credit Card',
       status: 'Pending',
       address: 'No 15, St 271, Phnom Penh, Cambodia',
       items: [
         { name: 'Pro Gaming Laptop', qty: 1, price: 1299.99 },
-        { name: 'Wireless Headphones', qty: 1, price: 199.99 }
+        { name: 'Samsung Galaxy S24 Ultra', qty: 1, price: 1199.99 }
       ]
     },
     { 
@@ -57,12 +57,12 @@ export default function Orders() {
       id: 'ORD-9817', 
       customer: 'Dara Pich', 
       date: '2026-07-04', 
-      total: 678.98, 
+      total: 1678.98, 
       payment: 'Credit Card',
       status: 'Completed',
       address: 'No 82, Toul Kork, Phnom Penh, Cambodia',
       items: [
-        { name: 'Wireless Headphones', qty: 1, price: 199.99 },
+        { name: 'Samsung Galaxy S24 Ultra', qty: 1, price: 1199.99 },
         { name: 'Ergonomic Office Chair', qty: 1, price: 349.00 },
         { name: 'Smart Fitness Band', qty: 1, price: 129.99 }
       ]
