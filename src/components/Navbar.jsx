@@ -66,9 +66,9 @@ export default function Navbar({ sidebarOpen, setSidebarOpen }) {
         {/* User Profile Shortcut */}
         <Link
           to="/profile"
-          className="w-8 h-8 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400 hover:bg-blue-500/30 hover:text-blue-300 transition-all shadow-md shadow-blue-500/5"
+          className="w-8 h-8 rounded-full overflow-hidden border border-blue-500/20 flex items-center justify-center hover:border-blue-500/50 transition-all shadow-md shadow-blue-500/5"
         >
-          <FaUser className="w-3 h-3" />
+          <img src="/profile.jpg" alt="User Profile" className="w-full h-full object-cover" />
         </Link>
       </div>
     </header>

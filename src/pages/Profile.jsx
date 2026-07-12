@@ -4,17 +4,17 @@ import { FaUser, FaEnvelope, FaMapMarkerAlt, FaBriefcase, FaCamera, FaCheck } fr
 export default function Profile() {
   // Profile state details
   const [profile, setProfile] = useState({
-    username: 'alec.thompson',
-    email: 'alec.thompson@example.com',
-    firstName: 'Alec',
-    lastName: 'Thompson',
+    username: 'samnang.meas',
+    email: 'samnang.meas@example.com',
+    firstName: 'Samnang',
+    lastName: 'Meas',
     address: 'Vimean Phnom Penh, Sen Sok',
     city: 'Phnom Penh',
     country: 'Cambodia',
     postalCode: '12000',
-    jobTitle: 'CEO / Co-Founder',
-    aboutMe: "Don't be scared of the truth because we need to restart the human foundation in truth. I'm a developer trying to build tools that make workflows seamless and beautiful.",
-    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256'
+    jobTitle: 'Lead Developer',
+    aboutMe: "I am a software engineer based in Phnom Penh. Passionate about building modern, responsive, and visually stunning web applications with React and Tailwind CSS.",
+    avatar: '/profile.jpg'
   });
 
   const [notification, setNotification] = useState(false);
