@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-blue-start: #0082ff;
+  --color-brand-blue-end: #00c6ff;
+  --color-dark-bg: #141526;
+  --color-dark-card: #1e1e30;
+  --color-dark-border: #2a2b45;
+  
+  --font-sans: 'Outfit', system-ui, -apple-system, sans-serif;
+}
+
+/* Base custom styles */
+body {
+  background-color: var(--color-dark-bg);
+  color: #f1f5f9;
+  font-family: var(--font-sans);
+}
+
+/* Custom Scrollbar for modern dark look */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #141526;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2b45;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3f4168;
+}
+
+/* Glassmorphism Styles */
+.glass-panel {
+  background: rgba(30, 30, 48, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-card {
+  background: rgba(30, 30, 48, 0.65);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0, 198, 255, 0.2);
+  box-shadow: 0 10px 20px -10px rgba(0, 198, 255, 0.15);
+}
+
+/* Gradient effects */
+.sidebar-gradient {
+  background: linear-gradient(135deg, #0052d4, #4364f7, #6fb1fc);
+}
+
+.card-glow-red {
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.1);
+}
+
+.card-glow-green {
+  box-shadow: 0 0 15px rgba(34, 197, 94, 0.1);
+}
+
+.card-glow-blue {
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.1);
+}
+
+/* Custom Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Smooth input styling */
+.custom-input {
+  background: rgba(20, 21, 38, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #fff;
+  transition: all 0.2s ease-in-out;
+}
+
+.custom-input:focus {
+  border-color: #00c6ff;
+  box-shadow: 0 0 0 2px rgba(0, 198, 255, 0.2);
+  outline: none;
+  background: rgba(20, 21, 38, 0.8);
+}
