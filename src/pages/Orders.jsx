@@ -14,7 +14,7 @@ export default function Orders() {
       address: 'No 15, St 271, Phnom Penh, Cambodia',
       items: [
         { name: 'Pro Gaming Laptop', qty: 1, price: 1299.99, image: 'https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&q=80&w=256' },
-        { name: 'Samsung Galaxy S24 Ultra', qty: 1, price: 1199.99, image: '/phone.jpg' }
+        { name: 'Samsung Galaxy S26 Ultra', qty: 1, price: 1199.99, image: '/phone.jpg' }
       ]
     },
     { 
@@ -26,7 +26,7 @@ export default function Orders() {
       status: 'Shipped',
       address: 'Vimean Phnom Penh, Sen Sok, Cambodia',
       items: [
-        { name: 'Vivo X100 Pro', qty: 1, price: 899.99, image: '/vivo.jpg' }
+        { name: 'Vivo X300 Pro', qty: 1, price: 899.99, image: '/vivo.jpg' }
       ]
     },
     { 
@@ -62,7 +62,7 @@ export default function Orders() {
       status: 'Completed',
       address: 'No 82, Toul Kork, Phnom Penh, Cambodia',
       items: [
-        { name: 'Samsung Galaxy S24 Ultra', qty: 1, price: 1199.99, image: '/phone.jpg' },
+        { name: 'Samsung Galaxy S26 Ultra', qty: 1, price: 1199.99, image: '/phone.jpg' },
         { name: 'OnePlus 12', qty: 1, price: 799.99, image: '/oneplus12.jpg' },
         { name: 'Smart Fitness Band', qty: 1, price: 129.99, image: 'https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?auto=format&fit=crop&q=80&w=256' }
       ]
