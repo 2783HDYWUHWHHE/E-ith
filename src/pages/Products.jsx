@@ -17,12 +17,12 @@ import {
 export default function Products() {
   // Mock products database
   const [products, setProducts] = useState([
-    { id: 1, name: 'Pro Gaming Laptop', sku: 'LTP-1092', category: 'Electronics', price: 1299.99, stock: 45, maxStock: 100 },
-    { id: 2, name: 'Wireless Headphones', sku: 'HD-403', category: 'Electronics', price: 199.99, stock: 12, maxStock: 80 },
-    { id: 3, name: 'Minimalist Leather Jacket', sku: 'JKT-220', category: 'Apparel', price: 249.50, stock: 8, maxStock: 40 },
-    { id: 4, name: 'Smart Fitness Band', sku: 'FIT-091', category: 'Electronics', price: 79.99, stock: 92, maxStock: 150 },
-    { id: 5, name: 'Titanium Mechanical Watch', sku: 'WTC-488', category: 'Accessories', price: 599.00, stock: 3, maxStock: 15 },
-    { id: 6, name: 'Ergonomic Office Chair', sku: 'CHR-882', category: 'Home', price: 349.00, stock: 0, maxStock: 30 }
+    { id: 1, name: 'Pro Gaming Laptop', sku: 'LTP-1092', category: 'Electronics', price: 1299.99, stock: 45, maxStock: 100, image: 'https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&q=80&w=512' },
+    { id: 2, name: 'Wireless Headphones', sku: 'HD-403', category: 'Electronics', price: 199.99, stock: 12, maxStock: 80, image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=512' },
+    { id: 3, name: 'Minimalist Leather Jacket', sku: 'JKT-220', category: 'Apparel', price: 249.50, stock: 8, maxStock: 40, image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&q=80&w=512' },
+    { id: 4, name: 'Smart Fitness Band', sku: 'FIT-091', category: 'Electronics', price: 79.99, stock: 92, maxStock: 150, image: 'https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?auto=format&fit=crop&q=80&w=512' },
+    { id: 5, name: 'Titanium Mechanical Watch', sku: 'WTC-488', category: 'Accessories', price: 599.00, stock: 3, maxStock: 15, image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=512' },
+    { id: 6, name: 'Ergonomic Office Chair', sku: 'CHR-882', category: 'Home', price: 349.00, stock: 0, maxStock: 30, image: 'https://images.unsplash.com/photo-1505797149-43b0069ec26b?auto=format&fit=crop&q=80&w=512' }
   ]);
 
   const [search, setSearch] = useState('');
@@ -39,6 +39,7 @@ export default function Products() {
   const [formPrice, setFormPrice] = useState('');
   const [formStock, setFormStock] = useState('');
   const [formMaxStock, setFormMaxStock] = useState('');
+  const [formImage, setFormImage] = useState('');
 
   // Handle filtering
   const filteredProducts = products.filter(product => {
@@ -56,6 +57,7 @@ export default function Products() {
     setFormPrice('');
     setFormStock('');
     setFormMaxStock('100');
+    setFormImage('');
     setIsModalOpen(true);
   };
 
@@ -68,6 +70,7 @@ export default function Products() {
     setFormPrice(product.price.toString());
     setFormStock(product.stock.toString());
     setFormMaxStock(product.maxStock.toString());
+    setFormImage(product.image || '');
     setIsModalOpen(true);
   };
 
@@ -78,6 +81,7 @@ export default function Products() {
     const parsedPrice = parseFloat(formPrice);
     const parsedStock = parseInt(formStock);
     const parsedMaxStock = parseInt(formMaxStock) || 100;
+    const defaultImage = 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&q=80&w=512';
 
     if (modalMode === 'add') {
       const newProduct = {
@@ -87,7 +91,8 @@ export default function Products() {
         category: formCategory,
         price: parsedPrice,
         stock: parsedStock,
-        maxStock: parsedMaxStock
+        maxStock: parsedMaxStock,
+        image: formImage || defaultImage
       };
       setProducts([...products, newProduct]);
     } else {
@@ -98,7 +103,8 @@ export default function Products() {
         category: formCategory, 
         price: parsedPrice, 
         stock: parsedStock,
-        maxStock: parsedMaxStock 
+        maxStock: parsedMaxStock,
+        image: formImage || defaultImage
       } : p));
     }
     setIsModalOpen(false);
@@ -219,14 +225,22 @@ export default function Products() {
 
               return (
                 <div key={product.id} className="glass-card rounded-2xl p-6 flex flex-col justify-between border border-white/5 relative overflow-hidden group">
-                  {/* Category icon header overlay */}
-                  <div className="flex justify-between items-start mb-4">
-                    <div className="p-3 bg-white/5 border border-white/5 rounded-xl">
-                      {getCategoryIcon(product.category)}
+                  {/* Product Visual */}
+                  <div className="w-full h-40 bg-[#141526] border border-white/5 rounded-xl overflow-hidden mb-4 relative">
+                    <img 
+                      src={product.image || 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&q=80&w=512'} 
+                      alt={product.name} 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    {/* Floating Category Icon and Stock Badge */}
+                    <div className="absolute inset-x-3 top-3 flex justify-between items-start">
+                      <div className="p-1.5 bg-black/60 backdrop-blur-md border border-white/10 rounded-lg text-white">
+                        {getCategoryIcon(product.category)}
+                      </div>
+                      <span className={`px-2.5 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider border backdrop-blur-md ${stockStatus.color}`}>
+                        {stockStatus.label}
+                      </span>
                     </div>
-                    <span className={`px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider border ${stockStatus.color}`}>
-                      {stockStatus.label}
-                    </span>
                   </div>
 
                   {/* Product Details */}
@@ -295,10 +309,17 @@ export default function Products() {
                     return (
                       <tr key={product.id} className="hover:bg-white/5 transition-colors">
                         <td className="py-4 px-6 flex items-center space-x-4">
-                          <div className="p-2.5 bg-white/5 border border-white/10 rounded-lg">
-                            {getCategoryIcon(product.category)}
+                          <div className="w-10 h-10 rounded-lg overflow-hidden border border-white/10 shrink-0 bg-[#141526]">
+                            <img 
+                              src={product.image || 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&q=80&w=512'} 
+                              alt={product.name} 
+                              className="w-full h-full object-cover"
+                            />
                           </div>
-                          <span className="font-semibold text-white text-sm">{product.name}</span>
+                          <div>
+                            <span className="font-semibold text-white text-sm block">{product.name}</span>
+                            <span className="text-[10px] text-white/30 sm:hidden block">{product.sku}</span>
+                          </div>
                         </td>
                         <td className="py-4 px-6 align-middle font-semibold text-white/65">
                           {product.sku}
@@ -446,6 +467,18 @@ export default function Products() {
                     className="w-full px-4 py-2.5 text-xs rounded-lg custom-input"
                   />
                 </div>
+              </div>
+
+              {/* Image URL input */}
+              <div>
+                <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">Product Image URL</label>
+                <input
+                  type="url"
+                  placeholder="Paste Unsplash or external image URL..."
+                  value={formImage}
+                  onChange={(e) => setFormImage(e.target.value)}
+                  className="w-full px-4 py-2.5 text-xs rounded-lg custom-input"
+                />
               </div>
 
               {/* Submit Buttons */}
