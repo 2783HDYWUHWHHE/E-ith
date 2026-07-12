@@ -135,9 +135,9 @@ export default function Products() {
   // Stock status text & color
   const getStockStatus = (stock, max) => {
     const ratio = stock / max;
-    if (stock === 0) return { label: 'Out of Stock', color: 'text-red-400 bg-red-500/10 border-red-500/20', barColor: 'bg-red-500' };
-    if (ratio < 0.15) return { label: 'Low Stock', color: 'text-amber-400 bg-amber-500/10 border-amber-500/20', barColor: 'bg-amber-500' };
-    return { label: 'In Stock', color: 'text-green-400 bg-green-500/10 border-green-500/20', barColor: 'bg-green-500' };
+    if (stock === 0) return { label: 'អស់ពីស្តុក', color: 'text-red-400 bg-red-500/10 border-red-500/20', barColor: 'bg-red-500' };
+    if (ratio < 0.15) return { label: 'ស្តុកទាប', color: 'text-amber-400 bg-amber-500/10 border-amber-500/20', barColor: 'bg-amber-500' };
+    return { label: 'មានក្នុងស្តុក', color: 'text-green-400 bg-green-500/10 border-green-500/20', barColor: 'bg-green-500' };
   };
 
   return (
@@ -145,15 +145,15 @@ export default function Products() {
       {/* Header Panel */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight text-white">Product Inventory</h2>
-          <p className="text-white/50 text-xs mt-1">Monitor stocks, unit prices, product codes, and categories.</p>
+          <h2 className="text-2xl font-bold tracking-tight text-white">សារពើភ័ណ្ឌផលិតផល</h2>
+          <p className="text-white/50 text-xs mt-1">ត្រួតពិនិត្យស្តុក តម្លៃឯកតា កូដផលិតផល និងប្រភេទផលិតផល។</p>
         </div>
         <button
           onClick={openAddModal}
           className="flex items-center space-x-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-full text-xs font-semibold tracking-wider transition-all duration-200 shadow-lg shadow-blue-500/15 cursor-pointer"
         >
           <FaPlus className="w-3 h-3" />
-          <span>ADD NEW PRODUCT</span>
+          <span>បន្ថែមផលិតផលថ្មី</span>
         </button>
       </div>
 
@@ -166,7 +166,7 @@ export default function Products() {
             <FaSearch className="text-white/40 w-3.5 h-3.5 mr-2.5" />
             <input
               type="text"
-              placeholder="Search SKU or name..."
+              placeholder="ស្វែងរកតាម SKU ឬឈ្មោះ..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="bg-transparent border-none text-white text-xs w-full focus:outline-none placeholder-white/30"
@@ -175,19 +175,28 @@ export default function Products() {
 
           {/* Category Pill Filters */}
           <div className="flex items-center bg-[#1e1e30] border border-white/5 p-1 rounded-full text-[10px] font-bold">
-            {['All', 'Electronics', 'Apparel', 'Accessories', 'Home'].map(cat => (
-              <button
-                key={cat}
-                onClick={() => setCategoryFilter(cat)}
-                className={`px-3 py-1.5 rounded-full transition-all duration-200 ${
-                  categoryFilter === cat
-                    ? 'bg-blue-600 text-white shadow-md'
-                    : 'text-white/60 hover:text-white'
-                }`}
-              >
-                {cat.toUpperCase()}
-              </button>
-            ))}
+            {['All', 'Electronics', 'Apparel', 'Accessories', 'Home'].map(cat => {
+              let displayCat = cat;
+              if (cat === 'All') displayCat = 'ទាំងអស់';
+              else if (cat === 'Electronics') displayCat = 'គ្រឿងអេឡិចត្រូនិច';
+              else if (cat === 'Apparel') displayCat = 'សម្លៀកបំពាក់';
+              else if (cat === 'Accessories') displayCat = 'គ្រឿងបន្លាស់';
+              else if (cat === 'Home') displayCat = 'ផ្ទះ និងការិយាល័យ';
+
+              return (
+                <button
+                  key={cat}
+                  onClick={() => setCategoryFilter(cat)}
+                  className={`px-3 py-1.5 rounded-full transition-all duration-200 ${
+                    categoryFilter === cat
+                      ? 'bg-blue-600 text-white shadow-md'
+                      : 'text-white/60 hover:text-white'
+                  }`}
+                >
+                  {displayCat.toUpperCase()}
+                </button>
+              );
+            })}
           </div>
         </div>
 
@@ -198,7 +207,7 @@ export default function Products() {
             className={`p-1.5 rounded-full transition-all ${
               viewMode === 'grid' ? 'bg-blue-600 text-white shadow-md' : 'text-white/50 hover:text-white'
             }`}
-            title="Grid View"
+            title="ទิដ្ឋភាពជាក្រឡា"
           >
             <FaTh className="w-3.5 h-3.5" />
           </button>
@@ -207,7 +216,7 @@ export default function Products() {
             className={`p-1.5 rounded-full transition-all ${
               viewMode === 'list' ? 'bg-blue-600 text-white shadow-md' : 'text-white/50 hover:text-white'
             }`}
-            title="List View"
+            title="ទិដ្ឋភាពជាបញ្ជី"
           >
             <FaList className="w-3.5 h-3.5" />
           </button>
@@ -253,8 +262,8 @@ export default function Products() {
                   {/* Stock Progress Bar */}
                   <div className="space-y-1.5 mb-6">
                     <div className="flex justify-between text-[10px] text-white/50">
-                      <span>Stock level</span>
-                      <span className="font-semibold">{product.stock} / {product.maxStock} units</span>
+                      <span>កម្រិតស្តុក</span>
+                      <span className="font-semibold">{product.stock} / {product.maxStock} គ្រឿង</span>
                     </div>
                     <div className="w-full bg-[#141526] h-1.5 rounded-full overflow-hidden">
                       <div 
@@ -266,19 +275,21 @@ export default function Products() {
 
                   {/* Action row */}
                   <div className="flex items-center justify-between pt-4 border-t border-white/5">
-                    <span className="text-[10px] text-white/35 font-bold uppercase tracking-widest">{product.category}</span>
+                    <span className="text-[10px] text-white/35 font-bold uppercase tracking-widest">
+                      {product.category === 'Electronics' ? 'គ្រឿងអេឡិចត្រូនិច' : product.category === 'Apparel' ? 'សម្លៀកបំពាក់' : product.category === 'Accessories' ? 'គ្រឿងបន្លាស់' : 'ផ្ទះ និងការិយាល័យ'}
+                    </span>
                     <div className="flex items-center space-x-1">
                       <button
                         onClick={() => openEditModal(product)}
                         className="p-2 text-white/60 hover:text-blue-400 hover:bg-white/5 rounded-lg transition-all"
-                        title="Edit Product"
+                        title="កែសម្រួលផលិតផល"
                       >
                         <FaEdit className="w-3.5 h-3.5" />
                       </button>
                       <button
                         onClick={() => handleDelete(product.id)}
                         className="p-2 text-white/60 hover:text-red-400 hover:bg-white/5 rounded-lg transition-all"
-                        title="Delete Product"
+                        title="លុបផលិតផល"
                       >
                         <FaTrashAlt className="w-3.5 h-3.5" />
                       </button>
@@ -295,12 +306,12 @@ export default function Products() {
               <table className="w-full text-left border-collapse">
                 <thead>
                   <tr className="border-b border-white/5 bg-[#17182b]/50 text-white/50 text-[10px] font-bold uppercase tracking-widest">
-                    <th className="py-4 px-6">Product Details</th>
-                    <th className="py-4 px-6">SKU</th>
-                    <th className="py-4 px-6">Category</th>
-                    <th className="py-4 px-6">Price</th>
-                    <th className="py-4 px-6">Stock Status</th>
-                    <th className="py-4 px-6 text-center">Actions</th>
+                    <th className="py-4 px-6">ព័ត៌មានលម្អិតអំពីផលិតផល</th>
+                    <th className="py-4 px-6">កូដ SKU</th>
+                    <th className="py-4 px-6">ប្រភេទ</th>
+                    <th className="py-4 px-6">តម្លៃ</th>
+                    <th className="py-4 px-6">ស្ថានភាពស្តុក</th>
+                    <th className="py-4 px-6 text-center">សកម្មភាព</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/5 text-xs">
@@ -325,7 +336,7 @@ export default function Products() {
                           {product.sku}
                         </td>
                         <td className="py-4 px-6 align-middle text-white/70">
-                          {product.category}
+                          {product.category === 'Electronics' ? 'គ្រឿងអេឡិចត្រូនិច' : product.category === 'Apparel' ? 'សម្លៀកបំពាក់' : product.category === 'Accessories' ? 'គ្រឿងបន្លាស់' : 'ផ្ទះ និងការិយាល័យ'}
                         </td>
                         <td className="py-4 px-6 align-middle font-bold text-white text-sm">
                           ${product.price.toFixed(2)}
@@ -335,7 +346,7 @@ export default function Products() {
                             <span className={`inline-flex px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider border ${stockStatus.color}`}>
                               {stockStatus.label}
                             </span>
-                            <span className="text-white/40 text-[10px]">{product.stock} left</span>
+                            <span className="text-white/40 text-[10px]">{product.stock} គ្រឿងនៅសល់</span>
                           </div>
                         </td>
                         <td className="py-4 px-6 align-middle text-center">
@@ -343,12 +354,14 @@ export default function Products() {
                             <button
                               onClick={() => openEditModal(product)}
                               className="p-2 text-white/60 hover:text-blue-400 hover:bg-white/5 rounded-lg transition-all"
+                              title="កែសម្រួលផលិតផល"
                             >
                               <FaEdit className="w-3.5 h-3.5" />
                             </button>
                             <button
                               onClick={() => handleDelete(product.id)}
                               className="p-2 text-white/60 hover:text-red-400 hover:bg-white/5 rounded-lg transition-all"
+                              title="លុបផលិតផល"
                             >
                               <FaTrashAlt className="w-3.5 h-3.5" />
                             </button>
@@ -364,7 +377,7 @@ export default function Products() {
         )
       ) : (
         <div className="glass-card rounded-2xl py-16 text-center text-white/40 font-medium">
-          No products match the selected search & filter conditions.
+          មិនមានផលិតផលត្រូវនឹងលក្ខខណ្ឌស្វែងរក និងចម្រោះឡើយ។
         </div>
       )}
 
@@ -379,7 +392,7 @@ export default function Products() {
           <div className="relative w-full max-w-md bg-[#1e1e30] border border-white/10 rounded-2xl p-6 shadow-2xl z-10 animate-fade-in-up">
             <div className="flex justify-between items-center mb-6">
               <h3 className="text-base font-bold text-white uppercase tracking-wider">
-                {modalMode === 'add' ? 'Create New Catalog Item' : 'Edit Catalog Details'}
+                {modalMode === 'add' ? 'បង្កើតមុខទំនិញថ្មី' : 'កែសម្រួលព័ត៌មានលម្អិតមុខទំនិញ'}
               </h3>
               <button 
                 onClick={() => setIsModalOpen(false)}
@@ -392,11 +405,11 @@ export default function Products() {
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Product Name */}
               <div>
-                <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">Product Name</label>
+                <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">ឈ្មោះផលិតផល</label>
                 <input
                   type="text"
                   required
-                  placeholder="e.g. UltraFit Gym Gloves"
+                  placeholder="ឧ. ទូរស័ព្ទដៃស្មាតហ្វូន"
                   value={formName}
                   onChange={(e) => setFormName(e.target.value)}
                   className="w-full px-4 py-2.5 text-xs rounded-lg custom-input"
@@ -406,27 +419,27 @@ export default function Products() {
               {/* SKU & Category */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">SKU Code</label>
+                  <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">កូដ SKU</label>
                   <input
                     type="text"
                     required
-                    placeholder="e.g. GLO-082"
+                    placeholder="ឧ. GLO-082"
                     value={formSku}
                     onChange={(e) => setFormSku(e.target.value)}
                     className="w-full px-4 py-2.5 text-xs rounded-lg custom-input"
                   />
                 </div>
                 <div>
-                  <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">Category</label>
+                  <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">ប្រភេទផលិតផល</label>
                   <select
                     value={formCategory}
                     onChange={(e) => setFormCategory(e.target.value)}
                     className="w-full px-4 py-2.5 text-xs rounded-lg custom-input bg-[#141526]"
                   >
-                    <option value="Electronics">Electronics</option>
-                    <option value="Apparel">Apparel</option>
-                    <option value="Accessories">Accessories</option>
-                    <option value="Home">Home</option>
+                    <option value="Electronics">គ្រឿងអេឡិចត្រូនិច</option>
+                    <option value="Apparel">សម្លៀកបំពាក់</option>
+                    <option value="Accessories">គ្រឿងបន្លាស់</option>
+                    <option value="Home">ផ្ទះ និងការិយាល័យ</option>
                   </select>
                 </div>
               </div>
@@ -434,7 +447,7 @@ export default function Products() {
               {/* Price & Stock */}
               <div className="grid grid-cols-3 gap-4">
                 <div className="col-span-1">
-                  <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">Unit Price ($)</label>
+                  <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">តម្លៃឯកតា ($)</label>
                   <input
                     type="number"
                     step="0.01"
@@ -446,7 +459,7 @@ export default function Products() {
                   />
                 </div>
                 <div>
-                  <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">In Stock</label>
+                  <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">ចំនួនក្នុងស្តុក</label>
                   <input
                     type="number"
                     required
@@ -457,7 +470,7 @@ export default function Products() {
                   />
                 </div>
                 <div>
-                  <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">Max Cap</label>
+                  <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">សមត្ថភាពស្តុកអតិបរមា</label>
                   <input
                     type="number"
                     required
@@ -471,10 +484,10 @@ export default function Products() {
 
               {/* Image URL input */}
               <div>
-                <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">Product Image URL</label>
+                <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">អាសយដ្ឋាន URL រូបភាពផលិតផល</label>
                 <input
                   type="url"
-                  placeholder="Paste Unsplash or external image URL..."
+                  placeholder="បិទភ្ជាប់អាសយដ្ឋាន URL រូបភាពពី Unsplash..."
                   value={formImage}
                   onChange={(e) => setFormImage(e.target.value)}
                   className="w-full px-4 py-2.5 text-xs rounded-lg custom-input"
@@ -488,13 +501,13 @@ export default function Products() {
                   onClick={() => setIsModalOpen(false)}
                   className="px-4 py-2 border border-white/10 hover:bg-white/5 text-white rounded-lg text-xs font-semibold tracking-wider transition-all"
                 >
-                  CANCEL
+                  បោះបង់
                 </button>
                 <button
                   type="submit"
                   className="px-6 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-semibold tracking-wider transition-all shadow-md shadow-blue-500/10"
                 >
-                  SAVE CHANGES
+                  រក្សាទុកការផ្លាស់ប្តូរ
                 </button>
               </div>
             </form>

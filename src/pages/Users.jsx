@@ -105,15 +105,15 @@ export default function Users() {
       {/* Header Panel */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight text-white">Users Directory</h2>
-          <p className="text-white/50 text-xs mt-1">Manage system privileges, profiles, and account statuses.</p>
+          <h2 className="text-2xl font-bold tracking-tight text-white">បញ្ជីឈ្មោះអ្នកប្រើប្រាស់</h2>
+          <p className="text-white/50 text-xs mt-1">គ្រប់គ្រងសិទ្ធិប្រព័ន្ធ ប្រវត្តិរូប និងស្ថានភាពគណនី។</p>
         </div>
         <button
           onClick={openAddModal}
           className="flex items-center space-x-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-full text-xs font-semibold tracking-wider transition-all duration-200 shadow-lg shadow-blue-500/15 cursor-pointer"
         >
           <FaUserPlus className="w-3.5 h-3.5" />
-          <span>ADD NEW USER</span>
+          <span>បន្ថែមអ្នកប្រើប្រាស់ថ្មី</span>
         </button>
       </div>
 
@@ -122,7 +122,7 @@ export default function Users() {
         <FaSearch className="text-white/40 w-4 h-4 mr-3" />
         <input
           type="text"
-          placeholder="Filter by name or email..."
+          placeholder="ស្វែងរកតាមឈ្មោះ ឬអ៊ីមែល..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="bg-transparent border-none text-white text-xs w-full focus:outline-none placeholder-white/30"
@@ -135,11 +135,11 @@ export default function Users() {
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="border-b border-white/5 bg-[#17182b]/50 text-white/50 text-[10px] font-bold uppercase tracking-widest">
-                <th className="py-4 px-6">User</th>
-                <th className="py-4 px-6">Role</th>
-                <th className="py-4 px-6">Status</th>
-                <th className="py-4 px-6">Date Added</th>
-                <th className="py-4 px-6 text-center">Actions</th>
+                <th className="py-4 px-6">អ្នកប្រើប្រាស់</th>
+                <th className="py-4 px-6">តួនាទី</th>
+                <th className="py-4 px-6">ស្ថានភាព</th>
+                <th className="py-4 px-6">កាលបរិច្ឆេទបន្ថែម</th>
+                <th className="py-4 px-6 text-center">សកម្មភាព</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-white/5 text-xs">
@@ -159,7 +159,7 @@ export default function Users() {
                     
                     {/* Role */}
                     <td className="py-4 px-6 align-middle font-medium text-white/80">
-                      {user.role}
+                      {user.role === 'Administrator' ? 'អ្នកគ្រប់គ្រង' : user.role === 'Editor' ? 'អ្នកកែសម្រួល' : 'អ្នកមើល'}
                     </td>
                     
                     {/* Status badge */}
@@ -171,7 +171,7 @@ export default function Users() {
                           ? 'bg-slate-500/10 text-slate-400 border border-slate-500/20'
                           : 'bg-red-500/10 text-red-400 border border-red-500/20'
                       }`}>
-                        {user.status}
+                        {user.status === 'Active' ? 'សកម្ម' : user.status === 'Offline' ? 'ក្រៅបណ្តាញ' : 'ផ្អាក'}
                       </span>
                     </td>
                     
@@ -186,14 +186,14 @@ export default function Users() {
                         <button
                           onClick={() => openEditModal(user)}
                           className="p-2 text-white/60 hover:text-blue-400 hover:bg-white/5 rounded-lg transition-all"
-                          title="Edit User"
+                          title="កែសម្រួល"
                         >
                           <FaEdit className="w-3.5 h-3.5" />
                         </button>
                         <button
                           onClick={() => handleDelete(user.id)}
                           className="p-2 text-white/60 hover:text-red-400 hover:bg-white/5 rounded-lg transition-all"
-                          title="Delete User"
+                          title="លុប"
                         >
                           <FaTrashAlt className="w-3.5 h-3.5" />
                         </button>
@@ -204,7 +204,7 @@ export default function Users() {
               ) : (
                 <tr>
                   <td colSpan="5" className="py-12 text-center text-white/40 font-medium">
-                    No users match your query.
+                    មិនមានអ្នកប្រើប្រាស់ត្រូវនឹងការស្វែងរករបស់អ្នកឡើយ។
                   </td>
                 </tr>
               )}
@@ -227,7 +227,7 @@ export default function Users() {
             {/* Header */}
             <div className="flex justify-between items-center mb-6">
               <h3 className="text-base font-bold text-white uppercase tracking-wider">
-                {modalMode === 'add' ? 'Add User Credentials' : 'Edit User Settings'}
+                {modalMode === 'add' ? 'បន្ថែមព័ត៌មានសម្ងាត់អ្នកប្រើប្រាស់' : 'កែសម្រួលការកំណត់អ្នកប្រើប្រាស់'}
               </h3>
               <button 
                 onClick={() => setIsModalOpen(false)}
@@ -241,11 +241,11 @@ export default function Users() {
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Name */}
               <div>
-                <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">Full Name</label>
+                <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">ឈ្មោះពេញ</label>
                 <input
                   type="text"
                   required
-                  placeholder="e.g. Chan Samnang"
+                  placeholder="ឧ. ចាន់ សំណាង"
                   value={formName}
                   onChange={(e) => setFormName(e.target.value)}
                   className="w-full px-4 py-2.5 text-xs rounded-lg custom-input"
@@ -254,11 +254,11 @@ export default function Users() {
 
               {/* Email */}
               <div>
-                <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">Email Address</label>
+                <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">អាសយដ្ឋានអ៊ីមែល</label>
                 <input
                   type="email"
                   required
-                  placeholder="e.g. samnang@domain.com"
+                  placeholder="ឧ. samnang@domain.com"
                   value={formEmail}
                   onChange={(e) => setFormEmail(e.target.value)}
                   className="w-full px-4 py-2.5 text-xs rounded-lg custom-input"
@@ -268,29 +268,29 @@ export default function Users() {
               <div className="grid grid-cols-2 gap-4">
                 {/* Role */}
                 <div>
-                  <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">Role Privilege</label>
+                  <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">សិទ្ធិតួនាទី</label>
                   <select
                     value={formRole}
                     onChange={(e) => setFormRole(e.target.value)}
                     className="w-full px-4 py-2.5 text-xs rounded-lg custom-input bg-[#141526]"
                   >
-                    <option value="Administrator">Administrator</option>
-                    <option value="Editor">Editor</option>
-                    <option value="Viewer">Viewer</option>
+                    <option value="Administrator">អ្នកគ្រប់គ្រង</option>
+                    <option value="Editor">អ្នកកែសម្រួល</option>
+                    <option value="Viewer">អ្នកមើល</option>
                   </select>
                 </div>
 
                 {/* Status */}
                 <div>
-                  <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">User Status</label>
+                  <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">ស្ថានភាពអ្នកប្រើប្រាស់</label>
                   <select
                     value={formStatus}
                     onChange={(e) => setFormStatus(e.target.value)}
                     className="w-full px-4 py-2.5 text-xs rounded-lg custom-input bg-[#141526]"
                   >
-                    <option value="Active">Active</option>
-                    <option value="Offline">Offline</option>
-                    <option value="Suspended">Suspended</option>
+                    <option value="Active">សកម្ម</option>
+                    <option value="Offline">ក្រៅបណ្តាញ</option>
+                    <option value="Suspended">ផ្អាកបណ្តោះអាសន្ន</option>
                   </select>
                 </div>
               </div>
@@ -302,13 +302,13 @@ export default function Users() {
                   onClick={() => setIsModalOpen(false)}
                   className="px-4 py-2 border border-white/10 hover:bg-white/5 text-white rounded-lg text-xs font-semibold tracking-wider transition-all"
                 >
-                  CANCEL
+                  បោះបង់
                 </button>
                 <button
                   type="submit"
                   className="px-6 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-semibold tracking-wider transition-all shadow-md shadow-blue-500/10"
                 >
-                  SAVE CHANGES
+                  រក្សាទុកការផ្លាស់ប្តូរ
                 </button>
               </div>
             </form>

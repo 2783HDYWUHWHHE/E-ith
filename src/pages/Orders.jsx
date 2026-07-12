@@ -127,8 +127,8 @@ export default function Orders() {
       {/* Header Panel */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight text-white">Order Management</h2>
-          <p className="text-white/50 text-xs mt-1">Review orders, update delivery statuses, and audit billing transactions.</p>
+          <h2 className="text-2xl font-bold tracking-tight text-white">ការគ្រប់គ្រងការបញ្ជាទិញ</h2>
+          <p className="text-white/50 text-xs mt-1">ពិនិត្យការបញ្ជាទិញ ធ្វើបច្ចុប្បន្នភាពស្ថានភាពដឹកជញ្ជូន និងផ្ទៀងផ្ទាត់ប្រតិបត្តិការទូទាត់ប្រាក់។</p>
         </div>
       </div>
 
@@ -139,7 +139,7 @@ export default function Orders() {
           <FaSearch className="text-white/40 w-3.5 h-3.5 mr-2.5" />
           <input
             type="text"
-            placeholder="Search Order ID or Customer Name..."
+            placeholder="ស្វែងរកតាមលេខកូដបញ្ជាទិញ ឬឈ្មោះអតិថិជន..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="bg-transparent border-none text-white text-xs w-full focus:outline-none placeholder-white/30"
@@ -148,19 +148,28 @@ export default function Orders() {
 
         {/* Tab Filters */}
         <div className="flex items-center bg-[#1e1e30] border border-white/5 p-1 rounded-full text-[10px] font-bold self-start sm:self-auto overflow-x-auto max-w-full">
-          {['All', 'Pending', 'Shipped', 'Completed', 'Cancelled'].map(status => (
-            <button
-              key={status}
-              onClick={() => setStatusFilter(status)}
-              className={`px-3.5 py-1.5 rounded-full transition-all duration-200 shrink-0 ${
-                statusFilter === status
-                  ? 'bg-blue-600 text-white shadow-md'
-                  : 'text-white/60 hover:text-white'
-              }`}
-            >
-              {status.toUpperCase()}
-            </button>
-          ))}
+          {['All', 'Pending', 'Shipped', 'Completed', 'Cancelled'].map(status => {
+            let displayStatus = status;
+            if (status === 'All') displayStatus = 'ទាំងអស់';
+            else if (status === 'Pending') displayStatus = 'រង់ចាំ';
+            else if (status === 'Shipped') displayStatus = 'បានដឹកជញ្ជូន';
+            else if (status === 'Completed') displayStatus = 'បានបញ្ចប់';
+            else if (status === 'Cancelled') displayStatus = 'បានបោះបង់';
+
+            return (
+              <button
+                key={status}
+                onClick={() => setStatusFilter(status)}
+                className={`px-3.5 py-1.5 rounded-full transition-all duration-200 shrink-0 ${
+                  statusFilter === status
+                    ? 'bg-blue-600 text-white shadow-md'
+                    : 'text-white/60 hover:text-white'
+                }`}
+              >
+                {displayStatus.toUpperCase()}
+              </button>
+            );
+          })}
         </div>
       </div>
 
@@ -170,14 +179,14 @@ export default function Orders() {
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="border-b border-white/5 bg-[#17182b]/50 text-white/50 text-[10px] font-bold uppercase tracking-widest">
-                <th className="py-4 px-6">Order ID</th>
-                <th className="py-4 px-6">Customer</th>
-                <th className="py-4 px-6">Date</th>
-                <th className="py-4 px-6 text-center">Items</th>
-                <th className="py-4 px-6">Payment</th>
-                <th className="py-4 px-6">Total</th>
-                <th className="py-4 px-6">Status</th>
-                <th className="py-4 px-6 text-center">Details</th>
+                <th className="py-4 px-6">លេខកូដបញ្ជាទិញ</th>
+                <th className="py-4 px-6">អតិថិជន</th>
+                <th className="py-4 px-6">កាលបរិច្ឆេទ</th>
+                <th className="py-4 px-6 text-center">ទំនិញ</th>
+                <th className="py-4 px-6">ការទូទាត់</th>
+                <th className="py-4 px-6">សរុប</th>
+                <th className="py-4 px-6">ស្ថានភាព</th>
+                <th className="py-4 px-6 text-center">ព័ត៌មានលម្អិត</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-white/5 text-xs">
@@ -202,12 +211,12 @@ export default function Orders() {
 
                     {/* Items Quantity */}
                     <td className="py-4 px-6 align-middle text-center font-medium text-white/80">
-                      {order.items.reduce((sum, item) => sum + item.qty, 0)}
+                      {order.items.reduce((sum, item) => sum + item.qty, 0)} គ្រឿង
                     </td>
 
                     {/* Payment Method */}
                     <td className="py-4 px-6 align-middle text-white/75">
-                      {order.payment}
+                      {order.payment === 'Credit Card' ? 'កាតឥណទាន' : order.payment === 'PayPal' ? 'PayPal' : order.payment === 'Crypto' ? 'គ្រីបតូ' : 'ទូទាត់ពេលទទួលបានទំនិញ'}
                     </td>
 
                     {/* Total Price */}
@@ -219,7 +228,9 @@ export default function Orders() {
                     <td className="py-4 px-6 align-middle">
                       <span className={`inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider border ${getStatusBadge(order.status)}`}>
                         <span className="w-1 h-1 rounded-full bg-current" />
-                        <span>{order.status}</span>
+                        <span>
+                          {order.status === 'Pending' ? 'រង់ចាំ' : order.status === 'Shipped' ? 'បានដឹកជញ្ជូន' : order.status === 'Completed' ? 'បានបញ្ចប់' : 'បានបោះបង់'}
+                        </span>
                       </span>
                     </td>
 
@@ -228,7 +239,7 @@ export default function Orders() {
                       <button
                         onClick={() => viewOrderDetails(order)}
                         className="p-2 text-white/60 hover:text-blue-400 hover:bg-white/5 rounded-lg transition-all cursor-pointer"
-                        title="View Receipt Details"
+                        title="មើលព័ត៌មានលម្អិតវិក្កយបត្រ"
                       >
                         <FaEye className="w-4 h-4" />
                       </button>
@@ -238,7 +249,7 @@ export default function Orders() {
               ) : (
                 <tr>
                   <td colSpan="8" className="py-12 text-center text-white/40 font-medium">
-                    No orders match your criteria.
+                    មិនមានការបញ្ជាទិញត្រូវនឹងលក្ខខណ្ឌរបស់អ្នកឡើយ។
                   </td>
                 </tr>
               )}
@@ -260,10 +271,10 @@ export default function Orders() {
             <div className="flex justify-between items-center mb-6">
               <div>
                 <h3 className="text-base font-bold text-white tracking-wider flex items-center space-x-2">
-                  <span>Order Invoice:</span>
+                  <span>វិក្កយបត្របញ្ជាទិញ៖</span>
                   <span className="text-blue-400 font-extrabold">{selectedOrder.id}</span>
                 </h3>
-                <span className="text-white/40 text-[10px] block mt-0.5">Placed on {selectedOrder.date}</span>
+                <span className="text-white/40 text-[10px] block mt-0.5">បានបញ្ជាទិញនៅថ្ងៃទី {selectedOrder.date}</span>
               </div>
               <button 
                 onClick={() => setIsModalOpen(false)}
@@ -280,8 +291,10 @@ export default function Orders() {
                 <div className="flex items-center space-x-2.5">
                   {getStatusIcon(selectedOrder.status)}
                   <div>
-                    <span className="text-white/40 text-[9px] font-bold uppercase block">Shipping Status</span>
-                    <span className="font-semibold text-white text-xs">{selectedOrder.status}</span>
+                    <span className="text-white/40 text-[9px] font-bold uppercase block">ស្ថានភាពដឹកជញ្ជូន</span>
+                    <span className="font-semibold text-white text-xs">
+                      {selectedOrder.status === 'Pending' ? 'រង់ចាំ' : selectedOrder.status === 'Shipped' ? 'បានដឹកជញ្ជូន' : selectedOrder.status === 'Completed' ? 'បានបញ្ចប់' : 'បានបោះបង់'}
+                    </span>
                   </div>
                 </div>
 
@@ -292,17 +305,17 @@ export default function Orders() {
                     onChange={(e) => updateOrderStatus(selectedOrder.id, e.target.value)}
                     className="px-3 py-1.5 text-[11px] rounded-lg custom-input bg-[#141526] font-semibold border-white/10"
                   >
-                    <option value="Pending">Set Pending</option>
-                    <option value="Shipped">Set Shipped</option>
-                    <option value="Completed">Set Completed</option>
-                    <option value="Cancelled">Set Cancelled</option>
+                    <option value="Pending">កំណត់ជា៖ រង់ចាំ</option>
+                    <option value="Shipped">កំណត់ជា៖ បានដឹកជញ្ជូន</option>
+                    <option value="Completed">កំណត់ជា៖ បានបញ្ចប់</option>
+                    <option value="Cancelled">កំណត់ជា៖ បានបោះបង់</option>
                   </select>
                 </div>
               </div>
 
               {/* Items List */}
               <div className="space-y-3">
-                <span className="text-white/40 text-[10px] font-bold tracking-widest uppercase block">Purchased Items</span>
+                <span className="text-white/40 text-[10px] font-bold tracking-widest uppercase block">ទំនិញដែលបានទិញ</span>
                 <div className="divide-y divide-white/5 border-y border-white/5 py-1">
                   {selectedOrder.items.map((item, idx) => (
                     <div key={idx} className="flex items-center justify-between py-2.5 text-xs">
@@ -316,7 +329,7 @@ export default function Orders() {
                         </div>
                         <div>
                           <div className="font-bold text-white">{item.name}</div>
-                          <div className="text-white/40 text-[10px] mt-0.5">Quantity: {item.qty}</div>
+                          <div className="text-white/40 text-[10px] mt-0.5">ចំនួន៖ {item.qty}</div>
                         </div>
                       </div>
                       <div className="font-semibold text-white/90">
@@ -330,19 +343,19 @@ export default function Orders() {
               {/* Delivery Details */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
                 <div>
-                  <span className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">Customer info</span>
+                  <span className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">ព័ត៌មានអតិថិជន</span>
                   <div className="font-semibold text-white">{selectedOrder.customer}</div>
-                  <div className="text-white/50 text-[11px] mt-0.5">Payment: {selectedOrder.payment}</div>
+                  <div className="text-white/50 text-[11px] mt-0.5">ការទូទាត់៖ {selectedOrder.payment === 'Credit Card' ? 'កាតឥណទាន' : selectedOrder.payment === 'PayPal' ? 'PayPal' : selectedOrder.payment === 'Crypto' ? 'គ្រីបតូ' : 'ទូទាត់ពេលទទួលបានទំនិញ'}</div>
                 </div>
                 <div>
-                  <span className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">Delivery Address</span>
+                  <span className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">អាសយដ្ឋានដឹកជញ្ជូន</span>
                   <div className="text-white/80 text-[11px] leading-relaxed">{selectedOrder.address}</div>
                 </div>
               </div>
 
               {/* Totals Summary */}
               <div className="pt-4 border-t border-white/5 flex justify-between items-center text-sm">
-                <span className="font-bold text-white/50">Total Billing:</span>
+                <span className="font-bold text-white/50">ការទូទាត់សរុប៖</span>
                 <span className="text-lg font-black text-white">${selectedOrder.total.toFixed(2)}</span>
               </div>
             </div>

@@ -9,17 +9,17 @@ export default function Navbar({ sidebarOpen, setSidebarOpen }) {
   const getPageTitle = () => {
     switch (location.pathname) {
       case '/dashboard':
-        return 'DASHBOARD';
+        return 'ផ្ទាំងគ្រប់គ្រង';
       case '/users':
-        return 'USERS';
+        return 'អ្នកប្រើប្រាស់';
       case '/products':
-        return 'PRODUCTS';
+        return 'ផលិតផល';
       case '/orders':
-        return 'ORDERS';
+        return 'ការបញ្ជាទិញ';
       case '/profile':
-        return 'USER PROFILE';
+        return 'ប្រវត្តិរូបអ្នកប្រើប្រាស់';
       default:
-        return 'DASHBOARD';
+        return 'ផ្ទាំងគ្រប់គ្រង';
     }
   };
 
@@ -44,7 +44,7 @@ export default function Navbar({ sidebarOpen, setSidebarOpen }) {
         <div className="relative">
           <input
             type="text"
-            placeholder="Search..."
+            placeholder="ស្វែងរក..."
             className="w-36 sm:w-56 px-4 py-2 pr-10 text-xs rounded-full custom-input"
           />
           <span className="absolute right-3 top-1/2 -translate-y-1/2 text-white/50 cursor-pointer hover:text-white transition-colors">

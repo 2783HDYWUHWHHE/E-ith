@@ -40,30 +40,30 @@ export default function Profile() {
       {notification && (
         <div className="fixed top-20 right-6 z-50 flex items-center space-x-2.5 bg-green-500 text-white px-5 py-3 rounded-xl shadow-xl border border-green-400 text-xs font-semibold animate-fade-in-up">
           <FaCheck className="w-3.5 h-3.5" />
-          <span>Profile configuration saved successfully!</span>
+          <span>បានរក្សាទុកការកំណត់ប្រវត្តិរូបដោយជោគជ័យ!</span>
         </div>
       )}
 
       {/* Header Info */}
       <div>
-        <h2 className="text-2xl font-bold tracking-tight text-white">User Profile</h2>
-        <p className="text-white/50 text-xs mt-1">Configure details, manage preferences, and review operations logs.</p>
+        <h2 className="text-2xl font-bold tracking-tight text-white">ប្រវត្តិរូបអ្នកប្រើប្រាស់</h2>
+        <p className="text-white/50 text-xs mt-1">កំណត់រចនាសម្ព័ន្ធព័ត៌មានលម្អិត គ្រប់គ្រងចំណូលចិត្ត និងពិនិត្យមើលកំណត់ហេតុប្រតិបត្តិការ។</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         {/* Left Side: Form Editor Panel */}
         <div className="lg:col-span-2 glass-card rounded-2xl p-6 border border-white/5 shadow-xl">
-          <h3 className="text-xs font-bold uppercase tracking-widest text-white/50 mb-6">Edit Profile Credentials</h3>
+          <h3 className="text-xs font-bold uppercase tracking-widest text-white/50 mb-6">កែសម្រួលព័ត៌មានសម្ងាត់ប្រវត្តិរូប</h3>
           
           <form onSubmit={handleSave} className="space-y-5">
             {/* Section 1: User info */}
             <div className="space-y-4">
-              <span className="text-[10px] text-blue-400 font-bold uppercase tracking-widest block border-b border-white/5 pb-1">User Information</span>
+              <span className="text-[10px] text-blue-400 font-bold uppercase tracking-widest block border-b border-white/5 pb-1">ព័ត៌មានអ្នកប្រើប្រាស់</span>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">Username</label>
+                  <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">ឈ្មោះអ្នកប្រើប្រាស់</label>
                   <input
                     type="text"
                     required
@@ -73,7 +73,7 @@ export default function Profile() {
                   />
                 </div>
                 <div>
-                  <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">Email Address</label>
+                  <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">អាសយដ្ឋានអ៊ីមែល</label>
                   <input
                     type="email"
                     required
@@ -86,7 +86,7 @@ export default function Profile() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">First Name</label>
+                  <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">នាមខ្លួន</label>
                   <input
                     type="text"
                     required
@@ -96,7 +96,7 @@ export default function Profile() {
                   />
                 </div>
                 <div>
-                  <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">Last Name</label>
+                  <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">នាមត្រកូល</label>
                   <input
                     type="text"
                     required
@@ -110,10 +110,10 @@ export default function Profile() {
 
             {/* Section 2: Contact info */}
             <div className="space-y-4 pt-2">
-              <span className="text-[10px] text-blue-400 font-bold uppercase tracking-widest block border-b border-white/5 pb-1">Contact Information</span>
+              <span className="text-[10px] text-blue-400 font-bold uppercase tracking-widest block border-b border-white/5 pb-1">ព័ត៌មានទំនាក់ទំនង</span>
               
               <div>
-                <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">Home Address</label>
+                <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">អាសយដ្ឋានផ្ទះ</label>
                 <input
                   type="text"
                   required
@@ -125,7 +125,7 @@ export default function Profile() {
 
               <div className="grid grid-cols-3 gap-4">
                 <div className="col-span-1">
-                  <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">City</label>
+                  <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">ទីក្រុង/ខេត្ត</label>
                   <input
                     type="text"
                     required
@@ -135,7 +135,7 @@ export default function Profile() {
                   />
                 </div>
                 <div>
-                  <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">Country</label>
+                  <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">ប្រទេស</label>
                   <input
                     type="text"
                     required
@@ -145,7 +145,7 @@ export default function Profile() {
                   />
                 </div>
                 <div>
-                  <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">Postal Code</label>
+                  <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">លេខកូដប្រៃសណីយ៍</label>
                   <input
                     type="text"
                     required
@@ -159,9 +159,9 @@ export default function Profile() {
 
             {/* Section 3: About me */}
             <div className="space-y-4 pt-2">
-              <span className="text-[10px] text-blue-400 font-bold uppercase tracking-widest block border-b border-white/5 pb-1">About Me Summary</span>
+              <span className="text-[10px] text-blue-400 font-bold uppercase tracking-widest block border-b border-white/5 pb-1">សេចក្តីសង្ខេបអំពីខ្ញុំ</span>
               <div>
-                <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">Biographical Details</label>
+                <label className="text-white/40 text-[10px] font-bold tracking-widest uppercase block mb-1">ព័ត៌មានជីវប្រវត្តិ</label>
                 <textarea
                   rows="4"
                   value={profile.aboutMe}
@@ -177,7 +177,7 @@ export default function Profile() {
                 type="submit"
                 className="px-6 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-full text-xs font-semibold tracking-wider transition-all duration-200 shadow-md shadow-blue-500/15 cursor-pointer"
               >
-                SAVE PROFILE DETAILS
+                រក្សាទុកព័ត៌មានលម្អិតប្រវត្តិរូប
               </button>
             </div>
           </form>
@@ -226,22 +226,22 @@ export default function Profile() {
             <div className="grid grid-cols-3 gap-2 border-t border-white/5 pt-5 max-w-xs mx-auto">
               <div>
                 <span className="block text-white font-extrabold text-sm tracking-wider">22</span>
-                <span className="block text-white/35 text-[9px] font-bold uppercase tracking-wider mt-0.5">Projects</span>
-              </div>
+                <span className="block text-white/35 text-[9px] font-bold uppercase tracking-wider mt-0.5">គម្រោង</span>
+                </div>
               <div>
                 <span className="block text-white font-extrabold text-sm tracking-wider">245</span>
-                <span className="block text-white/35 text-[9px] font-bold uppercase tracking-wider mt-0.5">Followers</span>
+                <span className="block text-white/35 text-[9px] font-bold uppercase tracking-wider mt-0.5">អ្នកតាមដាន</span>
               </div>
               <div>
                 <span className="block text-white font-extrabold text-sm tracking-wider">10.2k</span>
-                <span className="block text-white/35 text-[9px] font-bold uppercase tracking-wider mt-0.5">Contracts</span>
+                <span className="block text-white/35 text-[9px] font-bold uppercase tracking-wider mt-0.5">កិច្ចសន្យា</span>
               </div>
             </div>
           </div>
 
           {/* Social connections shortcut */}
           <div className="px-6 py-4 bg-[#17182b]/35 border-t border-white/5 text-center">
-            <span className="text-[9px] text-white/40 font-bold uppercase tracking-widest">Connect with team members</span>
+            <span className="text-[9px] text-white/40 font-bold uppercase tracking-widest">ភ្ជាប់ទំនាក់ទំនងជាមួយសមាជិកក្រុម</span>
           </div>
         </div>
 

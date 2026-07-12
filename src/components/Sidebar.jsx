@@ -5,11 +5,11 @@ import { FaUsers, FaBoxOpen, FaShoppingBag, FaUser, FaTimes, FaReact } from 'rea
 
 export default function Sidebar({ isOpen, setIsOpen }) {
   const menuItems = [
-    { name: 'DASHBOARD', path: '/dashboard', icon: <MdDashboard className="w-5 h-5" /> },
-    { name: 'USERS', path: '/users', icon: <FaUsers className="w-5 h-5" /> },
-    { name: 'PRODUCTS', path: '/products', icon: <FaBoxOpen className="w-5 h-5" /> },
-    { name: 'ORDERS', path: '/orders', icon: <FaShoppingBag className="w-5 h-5" /> },
-    { name: 'USER PROFILE', path: '/profile', icon: <FaUser className="w-5 h-5" /> }
+    { name: 'ផ្ទាំងគ្រប់គ្រង', path: '/dashboard', icon: <MdDashboard className="w-5 h-5" /> },
+    { name: 'អ្នកប្រើប្រាស់', path: '/users', icon: <FaUsers className="w-5 h-5" /> },
+    { name: 'ផលិតផល', path: '/products', icon: <FaBoxOpen className="w-5 h-5" /> },
+    { name: 'ការបញ្ជាទិញ', path: '/orders', icon: <FaShoppingBag className="w-5 h-5" /> },
+    { name: 'ប្រវត្តិរូប', path: '/profile', icon: <FaUser className="w-5 h-5" /> }
   ];
 
   return (
@@ -71,7 +71,7 @@ export default function Sidebar({ isOpen, setIsOpen }) {
             onClick={(e) => e.preventDefault()}
             className="flex items-center justify-center w-full py-3 bg-white text-blue-600 rounded-full text-xs font-bold tracking-wider hover:bg-blue-50 transition-all duration-200 shadow-md"
           >
-            UPGRADE TO PRO
+            ដំឡើងទៅជំនាន់ PRO
           </a>
         </div>
       </aside>
